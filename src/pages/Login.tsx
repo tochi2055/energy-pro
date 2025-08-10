@@ -23,7 +23,8 @@ import {
   ArrowRight,
   AlertCircle,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 interface LoginFormData {
   email: string;
@@ -31,9 +32,11 @@ interface LoginFormData {
 }
 
 const Login = () => {
+   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+   const navigate = useNavigate();
 
   const {
     register,
@@ -55,8 +58,19 @@ const Login = () => {
       // Here you would typically make an API call to authenticate
       console.log("Login attempt:", data);
 
-      // For demo purposes, show success
-      alert("Login successful! Redirecting to dashboard...");
+      const isReg = false; // Or from localStorage / auth context
+
+      if (!isReg) {
+        navigate("/signup");
+        return;
+      }
+
+      // Only runs if logged in
+      toast({
+        title: "🎉 Welcome back to Energy Pro Platform!",
+        description:
+          "Take your solar carrier to places",
+      });
     } catch (err) {
       setError("Invalid email or password. Please try again.");
     } finally {

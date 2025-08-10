@@ -1,89 +1,108 @@
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
-import { CheckCircle, Mail, User, Settings } from 'lucide-react';
+"use client";
 
-const StepFour: React.FC = () => {
-  const { watch } = useFormContext();
-  const formData = watch();
+import type React from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import type { EnergyOnboardingData } from "../EnergyOnboardingWizard";
 
+interface StepFourProps {
+  formData: EnergyOnboardingData;
+  handleSubmit: () => Promise<void>;
+  prevStep: () => void;
+  isSubmitting: boolean;
+}
+
+const StepFour: React.FC<StepFourProps> = ({
+  formData,
+  handleSubmit,
+  prevStep,
+  isSubmitting,
+}) => {
   return (
-    <div className="space-y-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="max-w-2xl mx-auto space-y-6"
+    >
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-green-600" />
-        </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          Review & Finish
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Confirmation</h2>
         <p className="text-gray-600">
-          Please review your information before completing the setup
+          Review your information before submitting
         </p>
       </div>
 
-      <div className="space-y-4">
-        <div className="bg-gray-50 rounded-lg p-4">
-          <div className="flex items-center space-x-3 mb-3">
-            <Mail className="w-5 h-5 text-indigo-600" />
-            <h3 className="font-medium text-gray-900">Account Information</h3>
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Your Details
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p className="text-sm font-medium text-gray-500">Full Name</p>
+            <p className="text-gray-800">{formData.fullName}</p>
           </div>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Email:</span>
-              <span className="text-gray-900">{formData.email}</span>
-            </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Email</p>
+            <p className="text-gray-800">{formData.email}</p>
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Phone Number</p>
+            <p className="text-gray-800">{formData.phoneNumber}</p>
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Company Name</p>
+            <p className="text-gray-800">{formData.companyName}</p>
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Company Address</p>
+            <p className="text-gray-800">{formData.companyAddress}</p>
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">Service Type</p>
+            <p className="text-gray-800">{formData.serviceType}</p>
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">
+              Installation Goals
+            </p>
+            <p className="text-gray-800">
+              {formData.installationGoals.join(", ")}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-500">
+              Preferred Contact Method
+            </p>
+            <p className="text-gray-800">{formData.preferredContactMethod}</p>
           </div>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-4">
-          <div className="flex items-center space-x-3 mb-3">
-            <User className="w-5 h-5 text-green-600" />
-            <h3 className="font-medium text-gray-900">Personal Details</h3>
-          </div>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Name:</span>
-              <span className="text-gray-900">{formData.firstName} {formData.lastName}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Company:</span>
-              <span className="text-gray-900">{formData.company}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Phone:</span>
-              <span className="text-gray-900">{formData.phone}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-50 rounded-lg p-4">
-          <div className="flex items-center space-x-3 mb-3">
-            <Settings className="w-5 h-5 text-purple-600" />
-            <h3 className="font-medium text-gray-900">Preferences</h3>
-          </div>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Role:</span>
-              <span className="text-gray-900 capitalize">{formData.role?.replace('-', ' ')}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Interests:</span>
-              <span className="text-gray-900">{formData.interests?.length || 0} selected</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Notifications:</span>
-              <span className="text-gray-900">{formData.notifications ? 'Enabled' : 'Disabled'}</span>
-            </div>
-          </div>
+        <div className="flex items-center space-x-2 mt-4">
+          <input
+            type="checkbox"
+            id="agreeTerms"
+            checked={formData.agreeTerms}
+            readOnly
+            className="form-checkbox h-4 w-4 text-purple-600 rounded"
+          />
+          <label htmlFor="agreeTerms" className="text-sm text-gray-700">
+            I agree to the terms and conditions.
+          </label>
         </div>
       </div>
 
-      <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
-        <h4 className="font-medium text-indigo-900 mb-2">Ready to get started?</h4>
-        <p className="text-sm text-indigo-700">
-          Click "Complete Setup" to finish creating your SlothUI account and start building amazing interfaces.
-        </p>
+      <div className="flex justify-between mt-8">
+        <Button variant="outline" onClick={prevStep} disabled={isSubmitting}>
+          Back
+        </Button>
+        <Button
+          onClick={handleSubmit}
+          disabled={isSubmitting || !formData.agreeTerms}
+        >
+          {isSubmitting ? "Submitting..." : "Submit Application"}
+        </Button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

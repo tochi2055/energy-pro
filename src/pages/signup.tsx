@@ -27,6 +27,8 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 interface SignUpFormData {
   username: string;
@@ -42,7 +44,8 @@ const SignUp = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
+ const { toast } = useToast();
   const {
     register,
     handleSubmit,
@@ -58,6 +61,7 @@ const SignUp = () => {
   const onSubmit = async (data: SignUpFormData) => {
     setIsLoading(true);
     setError("");
+   
 
     try {
       // Simulate API call
@@ -66,10 +70,17 @@ const SignUp = () => {
       // Here you would typically make an API call to create the account
       console.log("Sign up attempt:", data);
 
-      // For demo purposes, show success
-      alert(
-        "Account created successfully! Please check your email for verification."
-      );
+      const isOnBoarded = false; // Or from localStorage / auth context
+
+      if (!isOnBoarded) {
+        navigate("/onboarding");
+        // Only runs if signed up
+        toast({
+          title: "🎉 Welcome to Energy Pro Platform!",
+          description: "Please take a moment to complete your registeration",
+        });
+        return;
+      }
     } catch (err) {
       setError(
         "An error occurred while creating your account. Please try again."
