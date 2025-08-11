@@ -175,7 +175,7 @@ export function HeroSection({ scrollToWaitlist = () => {} }: HeroSectionProps) {
           </motion.div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <motion.div 
             className="bg-white border border-border rounded-sm shadow-md p-6 order-2 md:order-1"
             ref={featuresRef}
