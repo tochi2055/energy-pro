@@ -4,7 +4,6 @@ node_modules
 .env.example
 yarn.lock
 yarn-error.log
-vite.config.ts
 public/favicon.ico
 public/robots.txt
 public/og-image.png

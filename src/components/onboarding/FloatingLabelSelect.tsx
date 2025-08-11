@@ -23,7 +23,6 @@ interface FloatingLabelSelectProps {
   onChange: (e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
 }
 
-
 const FloatingLabelSelect: React.FC<FloatingLabelSelectProps> = ({
   name,
   label,
@@ -57,9 +56,9 @@ const FloatingLabelSelect: React.FC<FloatingLabelSelectProps> = ({
             "focus:border-purple-500 focus:ring-1 focus:ring-purple-500",
             error ? "border-red-500" : "border-gray-300",
             className,
-            "data-[placeholder]:pt-6 data-[placeholder]:pb-2",
-            "data-[state=open]:pt-6 data-[state=open]:pb-2",
-            selectedValue ? "pt-6 pb-2" : "" 
+            "data-[placeholder]:pt-2 data-[placeholder]:pb-2",
+            "data-[state=open]:pt-2 data-[state=open]:pb-2",
+            selectedValue ? "pt-2 pb-2" : ""
           )}
         >
           <SelectValue placeholder={placeholder} />
@@ -67,12 +66,11 @@ const FloatingLabelSelect: React.FC<FloatingLabelSelectProps> = ({
         <label
           htmlFor={name}
           className={cn(
-            "absolute left-3 top-1/2 -translate-y-1/2 cursor-text text-base text-gray-500 transition-all",
+            "absolute left-3 top-1/4 -translate-y-1/2 cursor-text text-base text-gray-500 transition-all",
             "peer-focus:top-2 peer-focus:text-xs peer-focus:font-medium peer-focus:text-purple-600",
-            "peer-data-[state=open]:top-2 peer-data-[state=open]:text-xs peer-data-[state=open]:font-medium peer-data-[state=open]:text-purple-600",
-            "peer-data-[placeholder]:top-1/2 peer-data-[placeholder]:-translate-y-1/2 peer-data-[placeholder]:text-base peer-data-[placeholder]:text-gray-500",
-            selectedValue ? "top-2 text-xs font-medium text-purple-600" : "", 
-            "bg-white px-1"
+            "peer-data-[state=open]:top-1 peer-data-[state=open]:text-xs peer-data-[state=open]:font-medium peer-data-[state=open]:text-purple-600",
+            "peer-data-[placeholder]:top-1/4 peer-data-[placeholder]:-translate-y-1/2 peer-data-[placeholder]:text-base peer-data-[placeholder]:text-gray-500",
+            selectedValue ? "top-2 text-xs font-medium text-purple-600" : ""
           )}
         >
           {label} {required && <span className="text-red-500">*</span>}
