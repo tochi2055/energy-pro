@@ -135,7 +135,7 @@ const AccountInfoStep: React.FC<AccountInfoStepProps> = ({ currentPage }) => {
             icon={<Phone />}
             rules={{
               pattern: {
-                value: /^(\+234\d{10}|0\d{10})$/,
+                value:  /^[+][1-9]\d{1,14}$/, 
                 message: "Invalid phone number",
               },
             }}
@@ -224,7 +224,6 @@ const AccountInfoStep: React.FC<AccountInfoStepProps> = ({ currentPage }) => {
                 {errors.installationTypes.message as string}
               </p>
             )}
-            {/* Hidden input to register the field for validation */}
             <input
               type="hidden"
               {...register("installationTypes", {

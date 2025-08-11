@@ -67,14 +67,12 @@ const SignUp = () => {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      // Here you would typically make an API call to create the account
       console.log("Sign up attempt:", data);
 
       const isOnBoarded = false; // Or from localStorage / auth context
 
       if (!isOnBoarded) {
         navigate("/onboarding");
-        // Only runs if signed up
         toast({
           title: "🎉 Welcome to Energy Pro Platform!",
           description: "Please take a moment to complete your registeration",
