@@ -107,7 +107,7 @@ interface FloatingLabelInputProps
   placeholder?: string;
   icon?: React.ReactNode;
   required?: boolean;
-  rules?: RegisterOptions; // Added rules prop
+  rules?: RegisterOptions; 
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
@@ -117,7 +117,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   placeholder,
   icon,
   required = false,
-  rules, // Destructure rules
+  rules, 
   className,
   ...props
 }) => {
@@ -136,8 +136,8 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
         {...register(name, {
           required: required ? `${label} is required` : false,
           ...rules,
-        })} // Pass rules to register
-        placeholder={placeholder || " "} // Use a space for placeholder to ensure floating label works
+        })}
+        placeholder={placeholder || " "} 
         className={cn(
           "peer block w-full rounded-md border px-3 pb-2 pt-6 text-sm shadow-sm outline-none transition-colors",
           "bg-white text-gray-900 placeholder-transparent",
@@ -151,10 +151,9 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
       <label
         htmlFor={name}
         className={cn(
-          "absolute left-3 top-1/2 -translate-y-1/2 cursor-text text-base text-gray-500 transition-all",
+          "absolute left-3 top-1/4 -translate-y-1/2 cursor-text text-xs text-gray-500 transition-all",
           "peer-focus:top-2 peer-focus:text-xs peer-focus:font-medium peer-focus:text-purple-600",
           "peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:font-medium peer-not-placeholder-shown:text-purple-600",
-          "bg-white px-1", // Ensure label has a background to cover input text
           icon ? "left-10" : ""
         )}
       >
